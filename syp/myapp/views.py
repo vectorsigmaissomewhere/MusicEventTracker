@@ -1,7 +1,9 @@
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout 
 from .forms import SignupForm, LoginForm
-from .models import MusicalEvent
+from .models import MusicalEvent,OurProduct,Feedback
+from .forms import FeedbackForm
 
 
 # Create your views here.
@@ -54,4 +56,32 @@ def my_view(request):
     # Fetch data stored by superuser
     superuser_data = MusicalEvent.objects.filter(user__is_superuser=True)
     return render(request, 'index.html', {'superuser_data': superuser_data})
+
+def user_about(request):
+    return render(request,'about.html')
+
+def user_shop(request):
+    products = OurProduct.objects.all() 
+    return render(request, 'shop.html', {'products': products})
+
+
+def user_feedback(request):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            feedback = form.save(commit=False)
+            feedback.user = request.user if request.user.is_authenticated else None
+            feedback.save()
+            # Render the same feedback.html template with a success message
+            return render(request, 'feedback.html', {'form': FeedbackForm(), 'success_message': 'Your feedback has been sent successfully!'})
+        else:
+            print(form.errors)  # Print form errors to the console for debugging
+            return HttpResponseBadRequest("Form is not valid")
+    else:
+        form = FeedbackForm()
+    return render(request, 'feedback.html', {'form': form})
+
+
+def thank_you(request):
+    return render(request,'thank_you.html')
 
