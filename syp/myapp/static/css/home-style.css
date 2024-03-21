@@ -1,8 +1,7 @@
-@charset "UTF-8";
     body {
-  font-family: "Open Sans", sans-serif;
-  line-height: 1.25;
-  background-color: #0080FF;
+        font-family: "Open Sans", sans-serif;
+        line-height: 1.25;
+        background: linear-gradient(to bottom, #0c1c20, #0932c8);
 }
 a
 {
@@ -191,4 +190,101 @@ table th {
   border: none;
   background-color: #3CBC8D;
   color: white;
+}
+
+/* This is for shop section */
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  text-align: center;
+}
+
+.product img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.product h3 {
+  margin-bottom: 5px;
+}
+
+.product p {
+  margin-bottom: 5px;
+}
+
+/*
+feedback 
+*/
+form {
+  margin: 0 auto;
+  width: 50%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+input[type="submit"] {
+  background-color: #3CBC8D;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+input[type="submit"]:hover {
+  background-color: #36997C;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  form {
+    width: 80%;
+  }
+}
+
+/* about page */
+.about-container {
+  background-color: #fff; /* Change background color */
+  padding: 20px; /* Add padding */
+  border-radius: 10px; /* Add border radius */
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3); /* Add box shadow */
+}
+
+.about-container h1 {
+  color: #fff; /* Change text color to white */
+  font-family: Arial, sans-serif; /* Change font family */
+}
+
+.about-container p {
+  color: #fff; /* Change text color to white */
+  font-family: Arial, sans-serif; /* Change font family */
+  line-height: 1.5; /* Adjust line height */
 }
