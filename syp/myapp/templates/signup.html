@@ -1,3 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/signup-style.css' %}">
+<title>Login</title>
+</head>
+<body>
+<div id='container'>
+    <div class='signup'>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Signup</button>
+        </form>
+     </div>
+     <div class='whysignLogin'>
+        <h1>Signup</h1>
+            <h2>Get Your Music Taste</h2>
+            <p>Music Event Tracker is the application that allows the users to know musical events online</p>
+            <a href="{% url 'login' %}">Already have account?</a>
+          </div>
+</div>
+</body>
+</html>
+
+<!--
+
 <h1>Signup</h1>
 <form method="POST">
     {% csrf_token %}
@@ -5,3 +33,5 @@
     <button type="submit">Signup</button>
     <a href="{% url 'login' %}">Already have account?</a>
 </form>
+
+-->
