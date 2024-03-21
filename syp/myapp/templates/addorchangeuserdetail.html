@@ -1,0 +1,19 @@
+<!-- I have not use this file in my project but 
+if you don't use you may face some error after running the project you can delete this file
+also delete the url and views section for this file as you may get some errors
+-->
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token }
+    <div>
+      <label>Enter new username</label>
+      <input name="username" required type="text">
+    </div>
+    <div>
+      <label>Enter new password</label>
+      <input name="newpassword" required type="password">
+    </div>
+    <div>
+      <lebel>Enter old password</lebel>
+      <input name="oldpassword" required type="password">
+    </div>
+  </form>
