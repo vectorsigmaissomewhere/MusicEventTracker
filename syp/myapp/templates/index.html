@@ -16,8 +16,8 @@
               <p>{{ request.user.username }}</p>
               {% endif %}<i class='fas fa-user-alt'></i></a></h2>
             <a href="{% url 'home' %}">Home<i class="fa fa-institution"></i></a>
-            <a href="myshop.html">Our Shop<i class='fas fa-cart-arrow-down'></i></a>
-            <a href="about.html">About Us<i class='fab fa-elementor'></i></a>
+            <a href="{% url 'feedback' %}">Feedback<i class='fas fa-cart-arrow-down'></i></a>
+            <a href="{% url 'about' %}">About Us<i class='fab fa-elementor'></i></a>
             <a href="{% url 'logout' %}">Logout <i class='fas fa-share-square'></i></a>
             <div class="search-container">
               <form method="GET" action="{% url 'home' %}">
@@ -27,23 +27,6 @@
             </div>
           </div>
            <br>
-  {% if request.user.is_authenticated %}
-  <p>{{ request.user.username }}</p>
-  <a href="{% url 'logout' %}">Logout</a>
-  <br>
-{% else %}
-  <a href="{% url 'login' %}">Login</a>
-  <a href="{% url 'signup' %}">Signup</a>
-{% endif %}
-<br>
-<h1>Welcome!</h1>
-
-<!-- Search form -->
-<form method="GET" action="{% url 'home' %}">
-  <input type="text" name="district" placeholder="Search by District">
-  <button type="submit">Search</button>
-</form>
-
 <!-- Display MusicalEvent data -->
 <table class="table mt-5">
   <thead>
@@ -69,6 +52,30 @@
     {% endfor %} 
   </tbody>
 </table>
-
+<div class="footer">
+  <p>All Right Reserved By me</p>
+  </div>
 </body>
 </html>
+
+
+
+<!--
+ if I ever need this 
+   {% if request.user.is_authenticated %}
+  <p>{{ request.user.username }}</p>
+  <a href="{% url 'logout' %}">Logout</a>
+  <br>
+{% else %}
+  <a href="{% url 'login' %}">Login</a>
+  <a href="{% url 'signup' %}">Signup</a>
+{% endif %}
+<br>
+
+Search bar If I ever use it somewhere again
+ Search form 
+<form method="GET" action="{% url 'home' %}">
+  <input type="text" name="district" placeholder="Search by District">
+  <button type="submit">Search</button>
+</form>
+-->
