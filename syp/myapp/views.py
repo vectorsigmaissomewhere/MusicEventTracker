@@ -3,12 +3,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout 
 from .forms import SignupForm, LoginForm
 from .models import MusicalEvent,OurProduct,Feedback
-from .forms import FeedbackForm
+from .forms import FeedbackForm,AddEventForm
+from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
-# Create your views here.
-# Home page
+
 def index(request):
     # Fetch all MusicalEvent objects
     musical_events = MusicalEvent.objects.all()
@@ -60,11 +59,6 @@ def my_view(request):
 def user_about(request):
     return render(request,'about.html')
 
-def user_shop(request):
-    products = OurProduct.objects.all() 
-    return render(request, 'shop.html', {'products': products})
-
-
 def user_feedback(request):
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
@@ -72,7 +66,6 @@ def user_feedback(request):
             feedback = form.save(commit=False)
             feedback.user = request.user if request.user.is_authenticated else None
             feedback.save()
-            # Render the same feedback.html template with a success message
             return render(request, 'feedback.html', {'form': FeedbackForm(), 'success_message': 'Your feedback has been sent successfully!'})
         else:
             print(form.errors)  # Print form errors to the console for debugging
@@ -84,4 +77,17 @@ def user_feedback(request):
 
 def thank_you(request):
     return render(request,'thank_you.html')
+
+@login_required(login_url='login') # user will get redirected to login page if he have not logged in
+def user_addevent(request):
+    if request.method == 'POST':
+        form = AddEventForm(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.user = request.user if request.user.is_authenticated else None
+            event.save()
+            return render(request, 'addevent.html', {'form': form,'success_message': 'Your event has been sent successfully!'})
+    else:
+        form = AddEventForm()
+    return render(request, 'addevent.html', {'form': form})
 
