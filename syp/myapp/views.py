@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     # Fetch all MusicalEvent objects
     musical_events = MusicalEvent.objects.all()
+    # searching for specific district
     if 'district' in request.GET:
         district = request.GET['district']
         musical_events = musical_events.filter(district__icontains=district)    
@@ -64,6 +65,7 @@ def user_feedback(request):
         form = FeedbackForm(request.POST)
         if form.is_valid():
             feedback = form.save(commit=False)
+            # storing user in feedback object
             feedback.user = request.user if request.user.is_authenticated else None
             feedback.save()
             return render(request, 'feedback.html', {'form': FeedbackForm(), 'success_message': 'Your feedback has been sent successfully!'})
@@ -84,10 +86,10 @@ def user_addevent(request):
         form = AddEventForm(request.POST)
         if form.is_valid():
             event = form.save(commit=False)
+            # storing the event first and then storing the user too as user is the foreign key 
             event.user = request.user if request.user.is_authenticated else None
             event.save()
             return render(request, 'addevent.html', {'form': form,'success_message': 'Your event has been sent successfully!'})
     else:
         form = AddEventForm()
     return render(request, 'addevent.html', {'form': form})
-
